@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 
-                <a class="navbar-brand" href="/hong">My First Web</a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath }/index.jsp">My First Web</a>
             </div>
            
            
@@ -70,7 +70,7 @@
                         <a href="${pageContext.request.contextPath }/member/member.jsp">Member</a>
                     </li>
                     <li>
-                        <a href="">BOARD</a>
+                        <a href="${pageContext.request.contextPath }/board/list.board">BOARD</a>
                     </li>
                     <c:choose>
 						<c:when test="${sessionScope.user_id == null }">

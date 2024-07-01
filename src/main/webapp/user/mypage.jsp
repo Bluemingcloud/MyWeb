@@ -9,12 +9,20 @@
 		${msg }<br>
 		
 		<a href="modify.user">회원정보 관리</a><br>
-		<a href="check.user">회원탈퇴</a><br>
-		<a href="updateCheckPw.user">비밀번호 변경</a><br>
+		<a href="delete.user">회원탈퇴</a><br>
+		<a href="updatePw.user">비밀번호 변경</a><br>
 		
 	</div>
 
 </section>
+
+<!-- JavaScript -->
+<!-- 
+<script>
+	alert("경고창...");
+	location.href='이동경로';
+</script>
+ -->
 
 
 <%@ include file="../include/footer.jsp" %>

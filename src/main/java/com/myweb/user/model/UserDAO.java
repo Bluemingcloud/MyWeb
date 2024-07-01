@@ -202,7 +202,8 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean checkPassword(String id, String pw) {
+	// login 메서드 재활용하여 아래기능을 대신한다.
+	public boolean checkPassword(String id, String pw) { 	
 		
 		String sql = "SELECT * FROM USERS WHERE ID = ? AND PW = ?";
 		

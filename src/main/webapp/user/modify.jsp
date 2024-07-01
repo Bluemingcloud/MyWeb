@@ -31,18 +31,17 @@
 				</tr>
 				<tr>
 					<td>남? 여?</td>
-					<td>
-						<c:choose>
-							<c:when test="${dto.gender == 'M'}">
+					<td>	
+						<c:choose>		
+							<c:when test="${dto.gender == 'M' }">
 								<input type="radio" name="gender" value="M" checked="checked">남자
 								<input type="radio" name="gender" value="F">여자
 							</c:when>
 							<c:otherwise>
 								<input type="radio" name="gender" value="M">남자
-								<input type="radio" name="gender" value="F" checked="checked">여자
+								<input type="radio" name="gender" value="F" checked="checked">여자							
 							</c:otherwise>
-						</c:choose>
-						
+						</c:choose>					
 					</td>
 				</tr>	
 			</table>

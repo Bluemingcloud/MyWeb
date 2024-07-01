@@ -1,6 +1,7 @@
 package com.myweb.user.service;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.myweb.user.model.UserDAO;
 import com.myweb.user.model.UserDTO;
@@ -118,7 +119,18 @@ public class UserServiceImpl implements UserService {
 		if(dao.checkPassword(id, pw)) {
 			dao.updateUser(dto);
 			session.setAttribute("user_name", name);
-			request.getRequestDispatcher("mypage.user").forward(request, response);
+			request.setAttribute("dto", dto);
+			
+			// java에서 알림창을 화면에 보내는 방법
+			// out 객체 - 클라이언트로 출력
+			response.setContentType("text/html; charset=UTF-8"); // 문서에 대한 타입
+			PrintWriter out = response.getWriter(); // 출력 객체 생성(PrintWriter - 브라우저로의 출력 타입)
+			// JavaScript 문의 내용을 출력객체를 통해 브라우저에 출력
+			out.println("<script>");
+			out.println("alert('회원정보가 정상 수정되었습니다.');");
+			out.println("location.href='mypage.user';");
+			out.println("</script>");
+			
 		} else {
 			String msg = "비밀번호가 일치하지 않습니다.";
 			request.setAttribute("msg", msg);
@@ -138,16 +150,18 @@ public class UserServiceImpl implements UserService {
 		
 		UserDAO dao = UserDAO.getInstance();
 		
-		if(dao.checkPassword(id, pw)) {
+		
+		// login 메서드 재활용하기
+		if(dao.loginUser(id, pw) != null) {
 			
 			dao.deleteUser(id);
 			response.sendRedirect("logout.user");
 			
 		} else {
-			String msg = "비밀번호가 일치하지 않습니다.";
+			String msg = "비밀번호를 확인하세요.";
 			request.setAttribute("msg", msg);
 			
-			request.getRequestDispatcher("check.user").forward(request, response);
+			request.getRequestDispatcher("delete.user").forward(request, response);
 		}
 		
 	}
@@ -163,26 +177,24 @@ public class UserServiceImpl implements UserService {
 		String pwChk = request.getParameter("pwChk");
 		
 		UserDAO dao = UserDAO.getInstance();
-		
+		String msg = "";
 		if(!dao.checkPassword(id, pwOld) || !pwNew.equals(pwChk)) {
-			String msg = "";
-			if(pwOld.equals(pwNew)) {
-				msg = "이전 비밀번호와 같은 비밀번호로는 변경할 수 없습니다.";
-			} else {
-				msg = "비밀번호가 일치하지 않습니다.";
-			}
+			msg = "비밀번호가 일치하지 않습니다.";
 			
-			request.setAttribute("msg", msg);
+			request.setAttribute("msg", msg);			
+			request.getRequestDispatcher("updatePw.user").forward(request, response);	
+		} else if(pwOld.equals(pwNew)){
+			msg = "이전 비밀번호와 같은 비밀번호로 변경할 수 없습니다.";
 			
-			request.getRequestDispatcher("updateCheckPw.user").forward(request, response);
+			request.setAttribute("msg", msg);			
+			request.getRequestDispatcher("updatePw.user").forward(request, response);			
 		} else {
-			
-			String msg = "비밀번호가 변경되었습니다.";
-			request.setAttribute("msg", msg);
+			msg = "비밀번호가 변경되었습니다.";
 			
 			dao.updateUser(id, pwNew);
-			request.getRequestDispatcher("mypage.user").forward(request, response);
 			
+			request.setAttribute("msg", msg);
+			request.getRequestDispatcher("mypage.user").forward(request, response);
 		}
 		
 	}

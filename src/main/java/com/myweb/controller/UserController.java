@@ -81,21 +81,21 @@ public class UserController extends HttpServlet{
 			service = new UserServiceImpl();
 			service.update(request, response);
 			
-		} else if(command.equals("/user/check.user")) {
+		} else if(command.equals("/user/delete.user")) {
 			
 			request.getRequestDispatcher("delete.jsp").forward(request, response);
 			
 			
-		} else if(command.equals("/user/delete.user")) {
+		} else if(command.equals("/user/deleteForm.user")) {
 			
 			service = new UserServiceImpl();
 			service.delete(request, response);
 			
-		} else if(command.equals("/user/updateCheckPw.user")) {
+		} else if(command.equals("/user/updatePw.user")) {
 			
 			request.getRequestDispatcher("updatePw.jsp").forward(request, response);
 			
-		} else if(command.equals("/user/updatePw.user")) {
+		} else if(command.equals("/user/updatePwForm.user")) {
 			
 			service = new UserServiceImpl();
 			service.updatePw(request, response);
