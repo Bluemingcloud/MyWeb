@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.myweb.user.model.UserMapper">
+	
+	<select id="findUser" resultType="com.myweb.user.model.UserDTO" parameterType="string">
+		SELECT * FROM USERS WHERE ID = #{id}
+	</select>
+	
+	<insert id="insertUser" parameterType="com.myweb.user.model.UserDTO">
+		INSERT INTO USERS(ID, PW, NAME, EMAIL, GENDER) 
+		VALUES(#{id}, #{pw}, #{name}, #{email}, #{gender})
+	</insert>
+	
+	<select id="loginUser" 
+			resultType="com.myweb.user.model.UserDTO" 
+			parameterType="com.myweb.user.model.UserDTO">
+		SELECT * FROM USERS WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<!-- parameterType 생략 가능 -->
+	<update id="modifyUser">
+		UPDATE USERS SET
+				NAME = #{name}, 
+				EMAIL = #{email}, 
+				GENDER = #{gender}
+		WHERE ID = #{id} AND PW = #{pw} 
+	</update>
+	
+	<update id="modifyPw">
+		UPDATE USERS SET PW = #{pw} WHERE ID = #{id}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM USERS WHERE ID = #{id} AND PW = #{pw}
+	</delete>
+
+</mapper>

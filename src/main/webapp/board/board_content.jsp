@@ -5,10 +5,11 @@
 <%@ include file="../include/header.jsp" %>
 
 <div align="center" class="div_center">
-
+	
 	<h3>게시글 내용 보기</h3>
 	<hr>
 	<table border="1" width="500">
+		
 		<tr>
 			<td width="20%">글번호</td>
 			<td width="30%">${dto.bno }</td>

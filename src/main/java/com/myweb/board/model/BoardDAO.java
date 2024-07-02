@@ -135,7 +135,7 @@ public class BoardDAO {
 			JdbcUtil.close(conn, pstmt, rs);
 		}
 
-		return list;		
+		return list;
 	}
 	
 	// 글 내용 데이터베이스 조회
@@ -226,7 +226,8 @@ public class BoardDAO {
 		return result;
 		
 	}
-
+	
+	// 글 데이터베이스 삭제 
 	public int delete(int bno) {
 		int result = 0;
 		String sql = "DELETE FROM BOARD WHERE BNO = ?";

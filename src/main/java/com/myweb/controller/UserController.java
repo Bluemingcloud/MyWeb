@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("*.user") // 확장자 패턴
 public class UserController extends HttpServlet{
@@ -68,8 +69,10 @@ public class UserController extends HttpServlet{
 			
 		} else if(command.equals("/user/logout.user")) {
 			
-			service = new UserServiceImpl();
-			service.logout(request, response);
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			response.sendRedirect( request.getContextPath() + "/index.jsp");
 			
 		} else if(command.equals("/user/modify.user")) { // 회원정보 수정 화면
 			

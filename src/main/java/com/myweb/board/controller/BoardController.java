@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 @WebServlet("*.board")
@@ -48,20 +49,31 @@ public class BoardController extends HttpServlet {
 			service.getList(request, response);
 			
 		} else if(command.equals("/board/write.board")) { // 글 작성 페이지
+			
+			// 매번 로그인이 필요한 서비스에 작성해 주어야 한다(중복 발생)
+			// 필터 클래스에서 확인후 컨트롤러로 보내기
+//			HttpSession session = request.getSession();
+//			String user_id = (String)session.getAttribute("user_id");
+//			
+//			if(user_id == null) {
+//				response.sendRedirect("/MyWeb/index.jsp");
+//				return;
+//			}
+			
 			request.getRequestDispatcher("board_write.jsp").forward(request, response);
 			
 		} else if(command.equals("/board/registForm.board")) { // 글 작성 서비스
 			service = new BoardServiceImpl();
 			service.regist(request, response);
 			
-		} else if(command.indexOf("/board/content.board") != -1) { // 글 조회 서비스
+		} else if(command.equals("/board/content.board")) { // 글 조회 서비스
 			service = new BoardServiceImpl();
 			service.getContent(request, response);
 			
 		} else if(command.equals("/board/contentPage.board")) { // 글 조회 페이지
 			request.getRequestDispatcher("board_content.jsp").forward(request, response);
 			
-		} else if(command.indexOf("/board/modify.board") != -1) { // 글 수정 페이지(이전 내용 가져오기)
+		} else if(command.equals("/board/modify.board")) { // 글 수정 페이지(이전 내용 가져오기)
 			service = new BoardServiceImpl();
 			service.getBefore(request, response);
 			
@@ -69,20 +81,22 @@ public class BoardController extends HttpServlet {
 			service = new BoardServiceImpl();
 			service.update(request, response);
 			
-		} else if(command.indexOf("/board/delete.board") != -1) {
+		} else if(command.equals("/board/delete.board")) { // 글 삭제 서비스
 			service = new BoardServiceImpl();
 			service.delete(request, response);
 			
-		} else if(command.equals("/board/alert.board")) {
+		} else if(command.equals("/board/alert.board")) { // 글 작성 제한 알림 서비스
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 후 이용할 수 있습니다.');");
 			out.println("location.href='list.board';");		
 			out.println("</script>");
-		} else if(command.equals("/board/search.board")) {
+			
+		} else if(command.equals("/board/search.board")) { // 글 검색 서비스
 			service = new BoardServiceImpl();
 			service.search(request, response);
+			
 		}
 		
 	}

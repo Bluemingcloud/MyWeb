@@ -4,9 +4,14 @@
 <div align="center" class="div_center">
 	<h3>게시판 글 수정 페이지</h3>
 	<hr>
-	
-	<form action="modifyForm.board?bno=${dto.bno }" method="post">
+	<!-- 
+		화면에 출력할 필요는 없지만 
+		사용해야하는(숨겨서 전송해야 하는) 데이터는 hidden 태그를 통해 숨겨둘 수 있다.
+	 -->
+	<form action="modifyForm.board" method="post">
 		
+		<input type="hidden" name="bno" value="#{dto.bno }">	
+	 	
 		<table border="1" width="500">
 			
 			<tr>
@@ -26,8 +31,7 @@
 			<tr>
 				<td>글 내용</td>
 				<td>
-					<textarea rows="10" style="width: 95%;" name="content">
-						${dto.content }
+					<textarea rows="10" style="width: 95%;" name="content">${dto.content }
 					</textarea>
 				</td>
 			</tr>
