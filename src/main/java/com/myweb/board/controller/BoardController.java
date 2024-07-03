@@ -85,19 +85,18 @@ public class BoardController extends HttpServlet {
 			service = new BoardServiceImpl();
 			service.delete(request, response);
 			
-		} else if(command.equals("/board/alert.board")) { // 글 작성 제한 알림 서비스
+		} else if(command.equals("/board/search.board")) { // 글 검색 서비스
+			service = new BoardServiceImpl();
+			service.search(request, response);
+			
+		} /*else if(command.equals("/board/alert.board")) { // 글 작성 제한 알림 서비스
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 후 이용할 수 있습니다.');");
 			out.println("location.href='list.board';");		
 			out.println("</script>");
-			
-		} else if(command.equals("/board/search.board")) { // 글 검색 서비스
-			service = new BoardServiceImpl();
-			service.search(request, response);
-			
-		}
+		}*/
 		
 	}
 	

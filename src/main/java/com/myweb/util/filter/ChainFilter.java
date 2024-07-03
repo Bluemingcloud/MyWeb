@@ -20,6 +20,8 @@ public class ChainFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
+		
+		
 		System.out.println("1번 필터 실행됨");
 		
 		// 다음 필터로 연결 - 다음이 없으면 servlet 으로 연결됨

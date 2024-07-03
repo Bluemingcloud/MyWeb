@@ -10,7 +10,7 @@
 	 -->
 	<form action="modifyForm.board" method="post">
 		
-		<input type="hidden" name="bno" value="#{dto.bno }">	
+		<input type="hidden" name="bno" value="${dto.bno }">	
 	 	
 		<table border="1" width="500">
 			

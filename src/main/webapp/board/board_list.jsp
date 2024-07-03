@@ -41,9 +41,7 @@
 							<input type="button" 
 								   value="글 작성"
 								   class="btn btn-default" 
-								   onclick="location.href='${sessionScope.user_id != null ? 
-								   							'write.board' :
-								   							'alert.board'}';"
+								   onclick="location.href='write.board';"
 							       />
 						  </div>
 						</form> 
